@@ -1,0 +1,9 @@
+server:
+  port: 4046
+spring:
+  application:
+    name: audioLib
+
+logging:
+  level:
+    root: ERROR
