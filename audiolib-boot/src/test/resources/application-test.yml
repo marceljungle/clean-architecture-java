@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: audioLib
-
-logging:
-  level:
-    root: INFO

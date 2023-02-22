@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: clean-architecture
+
+logging:
+  level:
+    root: INFO

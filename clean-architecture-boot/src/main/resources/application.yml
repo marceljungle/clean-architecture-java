@@ -1,0 +1,9 @@
+server:
+  port: 4046
+spring:
+  application:
+    name: clean-architecture
+
+logging:
+  level:
+    root: ERROR

@@ -9,21 +9,21 @@
     <relativePath/>
   </parent>
   <groupId>gigi.dan2011.gmail.com</groupId>
-  <artifactId>audioLib</artifactId>
+  <artifactId>clean-architecture</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>audioLib</name>
+  <name>clean-architecture</name>
   <description>Library for music</description>
   <packaging>pom</packaging>
 
   <inceptionYear>2022</inceptionYear>
   <organization>
-    <name>audioLib</name>
+    <name>clean-architecture</name>
   </organization>
   <modules>
-    <module>audiolib-domain</module>
-    <module>audiolib-usecases</module>
-    <module>audiolib-infrastructure</module>
-    <module>audiolib-boot</module>
+    <module>clean-architecture-domain</module>
+    <module>clean-architecture-usecases</module>
+    <module>clean-architecture-infrastructure</module>
+    <module>clean-architecture-boot</module>
   </modules>
 
   <properties>
@@ -34,22 +34,22 @@
     <dependencies>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>audiolib-boot</artifactId>
+        <artifactId>clean-architecture-boot</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>audiolib-domain</artifactId>
+        <artifactId>clean-architecture-domain</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>audiolib-usecases</artifactId>
+        <artifactId>clean-architecture-usecases</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>audiolib-infrastructure</artifactId>
+        <artifactId>clean-architecture-infrastructure</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
