@@ -12,13 +12,16 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
- * Either represents a value of two possible types. An Either is either a {@link Left} or a {@link Right}.
+ * Either represents a value of two possible types. An Either is either a {@link Left} or a
+ * {@link Right}.
  *
- * <p>If the given Either is a Right and projected to a Left, the Left operations have no effect on the Right value.<br> If the given Either
- * is a Left and projected to a Right, the Right operations have no effect on the Left value.<br> If a Left is projected to a Left or a
- * Right is projected to a Right, the operations have an effect. <br><strong>Example:</strong> A compute() function, which results either in
- * an Integer value (in the case of success) or in an error message of type String (in the case of failure). By convention the success case
- * is Right and the failure is Left.
+ * <p>If the given Either is a Right and projected to a Left, the Left operations have no effect on
+ * the Right value.<br> If the given Either
+ * is a Left and projected to a Right, the Right operations have no effect on the Left value.<br> If
+ * a Left is projected to a Left or a Right is projected to a Right, the operations have an effect.
+ * <br><strong>Example:</strong> A compute() function, which results either in an Integer value (in
+ * the case of success) or in an error message of type String (in the case of failure). By
+ * convention the success case is Right and the failure is Left.
  *
  * <pre>
  * <code>
@@ -26,7 +29,8 @@ import java.util.stream.Stream;
  * </code>
  * </pre>
  *
- * <p> If the result of compute() is Right(1), the value is Right(2).<br> If the result of compute() is Left("error"), the value is
+ * <p> If the result of compute() is Right(1), the value is Right(2).<br> If the result of compute()
+ * is Left("error"), the value is
  * Left("error"). </p>
  *
  * @param <L> The type of the Left value of an Either.
@@ -54,8 +58,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param right The value.
-   * @param <L> Type of left value.
-   * @param <R> Type of right value.
+   * @param <L>   Type of left value.
+   * @param <R>   Type of right value.
    * @return A new {@code Right} instance.
    */
   public static <L, R> Either<L, R> right(final R right) {
@@ -75,8 +79,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param left The value.
-   * @param <L> Type of left value.
-   * @param <R> Type of right value.
+   * @param <L>  Type of left value.
+   * @param <R>  Type of right value.
    * @return A new {@code Left} instance.
    */
   public static <L, R> Either<L, R> left(final L left) {
@@ -84,8 +88,9 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
   }
 
   /**
-   * Narrows a widened {@code Either<? extends L, ? extends R>} to {@code Either<L, R>} by performing a type-safe cast. This is eligible
-   * because immutable/read-only collections are covariant.
+   * Narrows a widened {@code Either<? extends L, ? extends R>} to {@code Either<L, R>} by
+   * performing a type-safe cast. This is eligible because immutable/read-only collections are
+   * covariant.
    *
    * <pre>
    * {
@@ -98,8 +103,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param either A {@code Either}.
-   * @param <L> Type of left value.
-   * @param <R> Type of right value.
+   * @param <L>    Type of left value.
+   * @param <R>    Type of right value.
    * @return the given {@code either} instance as narrowed type {@code Either<L, R>}.
    */
   @SuppressWarnings("unchecked")
@@ -171,10 +176,10 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * }
    * </pre>
    *
-   * @param leftMapper maps the left value if this is a Left
+   * @param leftMapper  maps the left value if this is a Left
    * @param rightMapper maps the right value if this is a Right
-   * @param <X> The new left type of the resulting Either
-   * @param <Y> The new right type of the resulting Either
+   * @param <X>         The new left type of the resulting Either
+   * @param <Y>         The new right type of the resulting Either
    * @return A new Either instance
    */
   public final <X, Y> Either<X, Y> bimap(final Function<? super L, ? extends X> leftMapper,
@@ -203,12 +208,13 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * }
    * </pre>
    *
-   * @param leftMapper maps the left value if this is a Left
+   * @param leftMapper  maps the left value if this is a Left
    * @param rightMapper maps the right value if this is a Right
-   * @param <U> type of the folded value
+   * @param <U>         type of the folded value
    * @return A value of type U
    */
-  public final <U> U fold(final Function<? super L, ? extends U> leftMapper, final Function<? super R, ? extends U> rightMapper) {
+  public final <U> U fold(final Function<? super L, ? extends U> leftMapper,
+      final Function<? super R, ? extends U> rightMapper) {
     Objects.requireNonNull(leftMapper, "leftMapper is null");
     Objects.requireNonNull(rightMapper, "rightMapper is null");
     if (this.isRight()) {
@@ -228,7 +234,7 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * }
    * </pre>
    *
-   * @param f A transformation
+   * @param f   A transformation
    * @param <U> Type of transformation result
    * @return An instance of type {@code U}
    * @throws NullPointerException if {@code f} is null
@@ -251,7 +257,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param other a function which converts a Left value to an alternative Right value
-   * @return the right value, if the underlying Either is a Right or else the alternative Right value provided by {@code other}
+   * @return the right value, if the underlying Either is a Right or else the alternative Right
+   * value provided by {@code other}
    */
   public final R getOrElseGet(final Function<? super L, ? extends R> other) {
     Objects.requireNonNull(other, "other is null");
@@ -305,12 +312,14 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * }
    * </pre>
    *
-   * @param <X> a throwable type
+   * @param <X>               a throwable type
    * @param exceptionFunction a function which creates an exception based on a Left value
-   * @return the right value, if the underlying Either is a Right or else throws the exception provided by {@code exceptionFunction}
+   * @return the right value, if the underlying Either is a Right or else throws the exception
+   * provided by {@code exceptionFunction}
    * @throws X if the projected Either is a Left
    */
-  public final <X extends Throwable> R getOrElseThrow(final Function<? super L, X> exceptionFunction) throws X {
+  public final <X extends Throwable> R getOrElseThrow(
+      final Function<? super L, X> exceptionFunction) throws X {
     Objects.requireNonNull(exceptionFunction, "exceptionFunction is null");
     if (this.isRight()) {
       return this.get();
@@ -342,8 +351,9 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
   }
 
   /**
-   * Calls recoveryFunction if the projected Either is a Left, performs no operation if this is a Right. This is similar to {@code
-   * getOrElseGet}, but where the fallback method also returns an Either.
+   * Calls recoveryFunction if the projected Either is a Left, performs no operation if this is a
+   * Right. This is similar to {@code getOrElseGet}, but where the fallback method also returns an
+   * Either.
    *
    * <pre>
    * {@code
@@ -359,7 +369,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * @throws NullPointerException if the given {@code recoveryFunction} is null
    */
   @SuppressWarnings("unchecked")
-  public final Either<L, R> recoverWith(final Function<? super L, ? extends Either<? extends L, ? extends R>> recoveryFunction) {
+  public final Either<L, R> recoverWith(
+      final Function<? super L, ? extends Either<? extends L, ? extends R>> recoveryFunction) {
     Objects.requireNonNull(recoveryFunction, "recoveryFunction is null");
     if (this.isLeft()) {
       return (Either<L, R>) recoveryFunction.apply(this.getLeft());
@@ -369,8 +380,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
   }
 
   /**
-   * Calls {@code recoveryFunction} if the projected Either is a Left, or returns {@code this} if Right. The result of {@code
-   * recoveryFunction} will be projected as a Right.
+   * Calls {@code recoveryFunction} if the projected Either is a Left, or returns {@code this} if
+   * Right. The result of {@code recoveryFunction} will be projected as a Right.
    *
    * <pre>
    * {@code
@@ -409,12 +420,13 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param mapper A mapper
-   * @param <U> Component type of the mapped right value
+   * @param <U>    Component type of the mapped right value
    * @return this as {@code Either<L, U>} if this is a Left, otherwise the right mapping result
    * @throws NullPointerException if {@code mapper} is null
    */
   @SuppressWarnings("unchecked")
-  public final <U> Either<L, U> flatMap(final Function<? super R, ? extends Either<L, ? extends U>> mapper) {
+  public final <U> Either<L, U> flatMap(
+      final Function<? super R, ? extends Either<L, ? extends U>> mapper) {
     Objects.requireNonNull(mapper, "mapper is null");
     if (this.isRight()) {
       return (Either<L, U>) mapper.apply(this.get());
@@ -436,7 +448,7 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param mapper A mapper
-   * @param <U> Component type of the mapped right value
+   * @param <U>    Component type of the mapped right value
    * @return a mapped {@code Monad}
    * @throws NullPointerException if {@code mapper} is null
    */
@@ -463,7 +475,7 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param leftMapper A mapper
-   * @param <U> Component type of the mapped right value
+   * @param <U>        Component type of the mapped right value
    * @return a mapped {@code Monad}
    * @throws NullPointerException if {@code mapper} is null
    */
@@ -488,7 +500,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    */
   public final Optional<Either<L, R>> filter(final Predicate<? super R> predicate) {
     Objects.requireNonNull(predicate, "predicate is null");
-    return this.isLeft() || predicate.test(this.get()) ? Optional.ofNullable(this) : Optional.empty();
+    return this.isLeft() || predicate.test(this.get()) ? Optional.ofNullable(this)
+        : Optional.empty();
   }
 
   /**
@@ -504,9 +517,10 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
   }
 
   /**
-   * Filters this right-biased {@code Either} by testing a predicate. If the {@code Either} is a {@code Right} and the predicate doesn't
-   * match, the {@code Either} will be turned into a {@code Left} with contents computed by applying the filterVal function to the {@code
-   * Either} value.
+   * Filters this right-biased {@code Either} by testing a predicate. If the {@code Either} is a
+   * {@code Right} and the predicate doesn't match, the {@code Either} will be turned into a
+   * {@code Left} with contents computed by applying the filterVal function to the {@code Either}
+   * value.
    *
    * <pre>
    * {@code
@@ -518,11 +532,13 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * </pre>
    *
    * @param predicate A predicate
-   * @param zero A function that turns a right value into a left value if the right value does not make it through the filter.
+   * @param zero      A function that turns a right value into a left value if the right value does
+   *                  not make it through the filter.
    * @return an {@code Either} instance
    * @throws NullPointerException if {@code predicate} is null
    */
-  public final Either<L, R> filterOrElse(final Predicate<? super R> predicate, final Function<? super R, ? extends L> zero) {
+  public final Either<L, R> filterOrElse(final Predicate<? super R> predicate,
+      final Function<? super R, ? extends L> zero) {
     Objects.requireNonNull(predicate, "predicate is null");
     Objects.requireNonNull(zero, "zero is null");
     if (this.isLeft() || predicate.test(this.get())) {
@@ -551,7 +567,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
   }
 
   @SuppressWarnings("unchecked")
-  public final Either<L, R> orElse(final Supplier<? extends Either<? extends L, ? extends R>> supplier) {
+  public final Either<L, R> orElse(
+      final Supplier<? extends Either<? extends L, ? extends R>> supplier) {
     Objects.requireNonNull(supplier, "supplier is null");
     return this.isRight() ? this : (Either<L, R>) supplier.get();
   }
@@ -624,7 +641,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
 
     @Override
     public boolean equals(final Object obj) {
-      return (obj == this) || (obj instanceof Left && Objects.equals(this.value, ((Left<?, ?>) obj).value));
+      return (obj == this) || (obj instanceof Left && Objects.equals(this.value,
+          ((Left<?, ?>) obj).value));
     }
 
     @Override
@@ -685,7 +703,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
 
     @Override
     public boolean equals(final Object obj) {
-      return (obj == this) || (obj instanceof Right && Objects.equals(this.value, ((Right<?, ?>) obj).value));
+      return (obj == this) || (obj instanceof Right && Objects.equals(this.value,
+          ((Right<?, ?>) obj).value));
     }
 
     @Override

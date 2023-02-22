@@ -1,7 +1,5 @@
 package com.example.clean.architecture.usecase.core.validation;
 
-import static com.example.clean.architecture.usecase.core.validation.ValidationResult.invalid;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,11 +28,14 @@ public class ValidationSupport {
     if (left.isValid() && right.isValid()) {
       return valid();
     } else {
-      return ValidationResult.invalid(concat(left.getReasons(), right.getReasons()).flatMap(List::stream).collect(Collectors.toList()));
+      return ValidationResult.invalid(
+          concat(left.getReasons(), right.getReasons()).flatMap(List::stream)
+              .collect(Collectors.toList()));
     }
   }
 
-  public static Stream<List<String>> concat(final Optional<List<String>> leftReasons, final Optional<List<String>> rightReason) {
+  public static Stream<List<String>> concat(final Optional<List<String>> leftReasons,
+      final Optional<List<String>> rightReason) {
     return Stream.concat(toStream(leftReasons), toStream(rightReason));
   }
 

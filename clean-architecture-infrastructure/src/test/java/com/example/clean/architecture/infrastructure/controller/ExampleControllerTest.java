@@ -1,10 +1,11 @@
 package com.example.clean.architecture.infrastructure.controller;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+
+import com.example.clean.architecture.infrastructure.controller.config.ExampleControllerConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
-
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class ExampleControllerTest {
 
@@ -13,14 +14,14 @@ public class ExampleControllerTest {
   @BeforeEach
   void setUp() {
     this.runner = new ApplicationContextRunner()
-        .withUserConfiguration(ExampleControllerTest.class);
+        .withUserConfiguration(ExampleControllerConfig.class);
   }
 
   @Test
   void testContextOk() {
     this.runner
         .run(context -> {
-          assertThat(context).hasSingleBean(ExampleControllerTest.class);
+          assertThat(context).hasSingleBean(ExampleControllerConfig.class);
         });
   }
 

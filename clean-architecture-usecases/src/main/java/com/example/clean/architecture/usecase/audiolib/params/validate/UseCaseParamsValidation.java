@@ -1,20 +1,19 @@
 package com.example.clean.architecture.usecase.audiolib.params.validate;
 
-import static com.example.clean.architecture.usecase.core.validation.ValidationResult.invalid;
-
 import com.example.clean.architecture.usecase.core.validation.ValidationResult;
 import com.example.clean.architecture.usecase.core.validation.ValidationSupport;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface UseCaseParamsValidation extends Function<String, ValidationResult> {
 
   static UseCaseParamsValidation messageContainsAction() {
-    return holds(s -> s.contains("action"), "Action not provided.");
+    return holds(s -> s.toLowerCase().contains("action"), "Action not provided.");
   }
 
   static UseCaseParamsValidation messageIsNotEmpty() {
-    return holds(s -> s != null && !s.isEmpty(), "Empty message.");
+    return holds(s -> Objects.nonNull(s) && !s.isEmpty(), "Empty message.");
   }
 
   static UseCaseParamsValidation fullParametersValidations() {

@@ -3,10 +3,10 @@ package com.example.clean.architecture.usecase.audiolib;
 import static com.example.clean.architecture.domain.core.Either.left;
 import static com.example.clean.architecture.domain.core.Either.right;
 
-import com.example.clean.architecture.domain.core.Validation;
-import com.example.clean.architecture.usecase.core.UseCase;
 import com.example.clean.architecture.domain.core.Either;
+import com.example.clean.architecture.domain.core.Validation;
 import com.example.clean.architecture.usecase.audiolib.params.ExampleUseCaseParams;
+import com.example.clean.architecture.usecase.core.UseCase;
 import com.example.clean.architecture.usecase.response.VoidResponse;
 
 public class ExampleUseCase implements UseCase<ExampleUseCaseParams, VoidResponse> {

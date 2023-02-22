@@ -1,14 +1,12 @@
 package com.example.clean.architecture.domain.core;
 
-import static java.util.Collections.unmodifiableList;
-
 import static com.example.clean.architecture.domain.core.Either.left;
+import static java.util.Collections.unmodifiableList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -24,6 +22,18 @@ public final class Validation {
 
   public static Validation empty() {
     return new Validation();
+  }
+
+  public static Validation of(final Throwable error) {
+    final Validation validation = new Validation();
+    validation.addError(error.getMessage());
+    return validation;
+  }
+
+  public static Validation of(final String error) {
+    final Validation validation = new Validation();
+    validation.addError(error);
+    return validation;
   }
 
   public List<String> getErrors() {
@@ -54,24 +64,13 @@ public final class Validation {
     }
   }
 
-  public <T extends RuntimeException> Validation orElseThrow(final Supplier<Validation> s1, final Function<List<String>, T> s2) {
+  public <T extends RuntimeException> Validation orElseThrow(final Supplier<Validation> s1,
+      final Function<List<String>, T> s2) {
     if (this.hasErrors()) {
       throw s2.apply(this.getErrors());
     } else {
       return s1.get();
     }
-  }
-
-  public static Validation of(final Throwable error) {
-    final Validation validation = new Validation();
-    validation.addError(error.getMessage());
-    return validation;
-  }
-
-  public static Validation of(final String error) {
-    final Validation validation = new Validation();
-    validation.addError(error);
-    return validation;
   }
 
   public <T> Either<Validation, T> asEither() {
