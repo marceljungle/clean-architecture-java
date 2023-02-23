@@ -34,7 +34,8 @@ class DummyTestITCase {
     assertEquals(message, result);
   }
 
-  @DisplayName("Given an empty message When service is invoked Then all flow is executed And response is KO.")
+  @DisplayName("Given an empty message When service is invoked "
+      + "Then all flow is executed And response is KO.")
   @Test
   void emptyTestNOK() {
 

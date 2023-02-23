@@ -37,8 +37,8 @@ class DummyTestIT {
     final String message = "This is an OK message with an action!";
 
     // When
-    given(exampleUseCase.execute(new ExampleUseCaseParams(message)))
-        .willReturn(Either.right(VoidResponse.ok()));
+    given(exampleUseCase.execute(new ExampleUseCaseParams(message))).willReturn(
+        Either.right(VoidResponse.ok()));
 
     final String result = this.exampleService.execute(message);
 
@@ -46,7 +46,8 @@ class DummyTestIT {
     assertEquals(message, result);
   }
 
-  @DisplayName("Given an empty message When service is invoked Then all flow is executed And response is KO.")
+  @DisplayName("Given an empty message When service is invoked Then all "
+      + "flow is executed And response is KO.")
   @Test
   void emptyTestNOK() {
 
@@ -54,8 +55,8 @@ class DummyTestIT {
     final String message = "";
 
     // When
-    given(exampleUseCase.execute(new ExampleUseCaseParams(message)))
-        .willReturn(Either.left(Validation.empty()));
+    given(exampleUseCase.execute(new ExampleUseCaseParams(message))).willReturn(
+        Either.left(Validation.empty()));
 
     final String result = this.exampleService.execute(message);
 

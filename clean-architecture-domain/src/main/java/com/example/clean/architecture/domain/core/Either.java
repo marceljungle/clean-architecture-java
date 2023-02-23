@@ -16,9 +16,9 @@ import java.util.stream.Stream;
  * {@link Right}.
  *
  * <p>If the given Either is a Right and projected to a Left, the Left operations have no effect on
- * the Right value.<br> If the given Either
- * is a Left and projected to a Right, the Right operations have no effect on the Left value.<br> If
- * a Left is projected to a Left or a Right is projected to a Right, the operations have an effect.
+ * the Right value.<br> If the given Either is a Left and projected to a Right, the Right operations
+ * have no effect on the Left value.<br> If a Left is projected to a Left or a Right is projected to
+ * a Right, the operations have an effect.
  * <br><strong>Example:</strong> A compute() function, which results either in an Integer value (in
  * the case of success) or in an error message of type String (in the case of failure). By
  * convention the success case is Right and the failure is Left.
@@ -29,9 +29,8 @@ import java.util.stream.Stream;
  * </code>
  * </pre>
  *
- * <p> If the result of compute() is Right(1), the value is Right(2).<br> If the result of compute()
- * is Left("error"), the value is
- * Left("error"). </p>
+ * <p> If the result of compute() is Right(1), the value is Right(2).<br> If the result of
+ * compute() is Left("error"), the value is Left("error"). </p>
  *
  * @param <L> The type of the Left value of an Either.
  * @param <R> The type of the Right value of an Either.
@@ -98,7 +97,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    *   // It's ok, Integer inherits from Number
    *   Either<?, Number> answer = Either.right(42);
    *   // RuntimeException is an Exception
-   *   Either&lt;Exception, ?&gt; failed = Either.left(new RuntimeException("Vogon poetry recital"));
+   *   Either&lt;Exception, ?&gt; failed
+   *   = Either.left(new RuntimeException("Vogon poetry recital"));
    * }
    * </pre>
    *
@@ -202,7 +202,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    *   Either&lt;Exception, Integer&gt; success = Either.right(3);
    *   // prints "Users updated: 3"
    *   System.out.println(success.fold(Exception::getMessage, count -> "Users updated: " + count));
-   *   Either&lt;Exception, Integer&gt; failure = Either.left(new Exception("Failed to update users"));
+   *   Either&lt;Exception, Integer&gt; failure
+   *   = Either.left(new Exception("Failed to update users"));
    *   // prints "Failed to update users"
    *   System.out.println(failure.fold(Exception::getMessage, count -> "Users updated: " + count));
    * }
@@ -258,7 +259,7 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    *
    * @param other a function which converts a Left value to an alternative Right value
    * @return the right value, if the underlying Either is a Right or else the alternative Right
-   * value provided by {@code other}
+    value provided by {@code other}
    */
   public final R getOrElseGet(final Function<? super L, ? extends R> other) {
     Objects.requireNonNull(other, "other is null");
@@ -306,7 +307,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    *   &#64;code
    *   Function&lt;String, RuntimeException&gt; exceptionFunction = RuntimeException::new;
    *   // prints "42"
-   *   System.out.println(Either.&lt;String, Integer&gt;right(42).getOrElseThrow(exceptionFunction));
+   *   System.out.println(Either.&lt;String,
+        Integer&gt;right(42).getOrElseThrow(exceptionFunction));
    *   // throws RuntimeException("no value found")
    *   Either.left("no value found").getOrElseThrow(exceptionFunction);
    * }
@@ -315,7 +317,7 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * @param <X>               a throwable type
    * @param exceptionFunction a function which creates an exception based on a Left value
    * @return the right value, if the underlying Either is a Right or else throws the exception
-   * provided by {@code exceptionFunction}
+    provided by {@code exceptionFunction}
    * @throws X if the projected Either is a Left
    */
   public final <X extends Throwable> R getOrElseThrow(
@@ -358,7 +360,8 @@ public abstract class Either<L, R> implements Iterable<R>, Serializable {
    * <pre>
    * {@code
    * Either<Integer, String> tryGetString() { return Either.left(1); }
-   * Either<Integer, String> tryGetStringAnotherWay(Integer lvalue) { return Either.right("yo " + lvalue); }
+   * Either<Integer, String> tryGetStringAnotherWay(Integer lvalue)
+    { return Either.right("yo " + lvalue); }
    * = Right("yo 1")
    * tryGetString().recover(this::tryGetStringAnotherWay);
    * }
